@@ -71,14 +71,13 @@ const Tiptap = ({ onEditorContentSave }) => {
   const allNotes = async () => {
     try {
       const res = await axios.get("http://localhost:5000/api/notes");
-      console.log("ALL", res.data);
+      console.log("Data:", res.data);
       setNotes(res.data);
     } catch (err) {
       console.log(err);
     }
   };
   
-
   const setLink = useCallback(() => {
     const previousUrl = editor.getAttributes("link").href;
     const url = window.prompt("URL", previousUrl);
@@ -111,16 +110,15 @@ const Tiptap = ({ onEditorContentSave }) => {
     return null;
   }
 
-  // const handleEditorContent = () => {
-  //   const html = editor.getHTML();
-  //   // console.log(html)
-  //   onEditorContentSave(html);
-  // };
+  const handleEditorContent = () => {
+    const html = editor.getHTML();
+    // console.log(html)
+    content(html);
+  };
 
   const saveContent = async () => {
     try {
       const html = editor.getHTML();
-      // console.log(html)
       onEditorContentSave(html);
       const response = await axios.post("http://localhost:5000/api/notes", {
         content: html,
@@ -129,14 +127,13 @@ const Tiptap = ({ onEditorContentSave }) => {
       console.log("Post created:", response.data);
     } catch (error) {
       console.error("Error creating post:", error);
-      // Handle error
     }
   };
 
   return (
     <>
       {/* title */}
-      <h1 className="my-4 text-2xl font-bold text-center text-slate-600">
+      <h1 className="my-4 text-4xl font-bold text-center text-slate-600">
         Notes App
       </h1>
 
@@ -607,7 +604,7 @@ const Tiptap = ({ onEditorContentSave }) => {
 
         {/* Editor content */}
         <div className="border-2 border-black rounded-b-xl">
-          <EditorContent editor={editor} className="" />
+          <EditorContent handleEditorContent={handleEditorContent} editor={editor} className="" />
         </div>
 
         {/* Save button */}

@@ -1,10 +1,10 @@
-import NewPost from "./components/blog/NewPost"
+import NewNote from "./components/blog/NewNote"
 import "../src/App.css"
 
 function App() {
   return (
     <>
-      <NewPost />
+      <NewNote />
     </>
   )
 }

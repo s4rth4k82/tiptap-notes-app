@@ -1,14 +1,12 @@
 import { useState } from "react"
 import Tiptap from "../Tiptap"
-import ShowPost from "./ShowPost"
-import NoteList from "./NoteList"
 
-const NewPost = () => {
+const NewNote = () => {
   const [htmlContent, setHtmlContent] = useState("")
 
   const handleEditorContentSave = (html) => {
-    // console.log(html)
     setHtmlContent(html)
+    console.log(htmlContent)
   }
   return (
     <>
@@ -17,4 +15,4 @@ const NewPost = () => {
   )
 }
 
-export default NewPost
+export default NewNote
